@@ -15,12 +15,10 @@ public:
     int quantity[100];
     void create()
     {
-
         int ch=0;
         cout<<"Enter the name, initial quantity and price of the products"<<endl;
         while(1)
         {
-
             cout<<"Enter the name of product "<<c<<endl;
             cin>>product[c];
             cout<<"Enter the price of product "<<c<<endl;
@@ -33,15 +31,10 @@ public:
                 break;
             else if (ch==1)
                 c++;
-
-
         }
-
-
     }
     void show()
     {
-
         int a;
         for(a=1; a <= c; a++)
         {
@@ -50,14 +43,13 @@ public:
             cout<<"Price: "<<price[a]<<endl;
             cout<<"Available in stock:"<<quantity[a]<<endl;
         }
-
     }
     friend void choice(Inventory obj, Sale obj2);
 };
 
 class Sale:public Inventory
 {
-    public:
+public:
     friend void choice(Inventory obj, Sale obj2);
     Sale()
     {
@@ -99,10 +91,7 @@ c:
                     cout<<"Total quantity: "<<saleQty<<endl;
                     cout<<"Total price="<<saleQty*Inventory::price[temp]<<endl;
                     cout<<"Remaining quantity in stock: "<<Inventory::quantity[temp];
-
                 }
-
-
             }
             else
             {
@@ -111,46 +100,42 @@ c:
             }
         }
     }
-
 };
 
-    void Choice(Inventory obj, Sale obj2)
+void Choice(Inventory obj, Sale obj2)
+{
+    int choice, choice2;
+    cout<<"Do you want to start sale operations or update inventory?"
+        <<endl
+        <<"Press 1 for inventory"
+        <<endl
+        <<"Press 2 for sales"
+        <<endl;
+    cin>>choice;
+    if (choice==1)
     {
-        int choice, choice2;
-        cout<<"Do you want to start sale operations or update inventory?"
+        obj.create();
+        system("cls");
+        cout<<"Do you want to view the inventory?"
             <<endl
-            <<"Press 1 for inventory"
+            <<"Press 1 yes"
             <<endl
-            <<"Press 2 for sales"
+            <<"Press 2 no"
             <<endl;
-        cin>>choice;
-        if (choice==1)
+        cin>>choice2;
+        if (choice2==1)
         {
-            obj.create();
-            system("cls");
-            cout<<"Do you want to view the inventory?"
-                <<endl
-                <<"Press 1 yes"
-                <<endl
-                <<"Press 2 no"
-                <<endl;
-            cin>>choice2;
-            if (choice2==1)
-            {
-                obj.show();
-
-            }
-            else
-                obj2.order();
+            obj.show();
         }
-
+        else
+            obj2.order();
     }
-    int main()
-    {
-        Inventory obj;
-        Sale obj2;
-        Choice(obj, obj2);
-
-        return 0;
-    }
+}
+int main()
+{
+    Inventory obj;
+    Sale obj2;
+    Choice(obj, obj2);
+    return 0;
+}
 
